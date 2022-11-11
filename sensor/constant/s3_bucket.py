@@ -1,2 +1,2 @@
-TRAINING_BUCKET_NAME = "project1-sensor-training-pipeline-aws1"
+TRAINING_BUCKET_NAME = "sensor-fault-detection-project"
 PREDICTION_BUCKET_NAME = "sensor-datasource"
