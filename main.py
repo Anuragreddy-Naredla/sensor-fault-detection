@@ -37,17 +37,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/", tags = ["authentication"])
+@app.get("/", tags=["authentication"])
 async def index():
-    return RedirectResponse(url = "/docs")
+    return RedirectResponse(url="/docs")
+
 @app.get("/train")
-async def train_Route():
+async def train_route():
     try:
         train_pipeline = TrainPipeline()
         if train_pipeline.is_pipeline_running:
-            return Response("Training Pipeline is already running.")
+            return Response("Training pipeline is already running.")
         train_pipeline.run_pipeline()
-        return Response("Training Successful")
+        return Response("Training successful !!")
     except Exception as e:
         return Response(f"Error Occurred! {e}")
 
@@ -68,31 +69,18 @@ async def predict_route():
         # decide how to return file to user.
     # except Exception as e:
     #     raise Response(f"Error Occured! {e}") from e
-# def main():
-#     try:
-#         print("cvbnjm")
-#         set_env_variable(env_file_path)
-#         print("cvgbn")
-#         train_pipeline = TrainPipeline()
-#         train_pipeline.run_pipeline()
-#     except Exception as e:
-#         print(e)
-#         logging.exception(e)
-if __name__ == "__main__":
-    # for testing purpose
-    # mongodb_client = MongoDBClient()
-    # print(mongodb_client.database.list_collection_names())
-    # training_pipeline_config = TrainingPipelineConfig()
-    # data_ingestion_config = DataIngestionConfig(training_pipeline_config = training_pipeline_config)
-    # print(data_ingestion_config.__dict__)
 
-
+def main():
     try:
         set_env_variable(env_file_path)
-        train_pipeline = TrainPipeline()
-        train_pipeline.run_pipeline()
+        training_pipeline = TrainPipeline()
+        training_pipeline.run_pipeline()
     except Exception as e:
         print(e)
         logging.exception(e)
 
+
+if __name__ == "__main__":
+    #main()
+    # set_env_variable(env_file_path)
     app_run(app, host = APP_HOST, port = APP_PORT)
