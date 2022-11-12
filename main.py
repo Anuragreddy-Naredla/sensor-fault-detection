@@ -1,19 +1,16 @@
-
 import os
-
+from sensor.logger import logging
+from sensor.pipeline.training_pipeline import TrainPipeline
+from sensor.utils.main_utils import read_yaml_file
+from sensor.constant.training_pipeline import SAVED_MODEL_DIR
 from fastapi import FastAPI
-from fastapi.responses import Response
+from sensor.constant.application import APP_HOST, APP_PORT
 from starlette.responses import RedirectResponse
 from uvicorn import run as app_run
-from fastapi.middleware.cors import CORSMiddleware
-
-from sensor.pipeline.training_pipeline import TrainPipeline
-from sensor.logger import logging
-from sensor.constant.training_pipeline import SAVED_MODEL_DIR
-from sensor.constant.application import APP_HOST, APP_PORT
-from sensor.ml.model.estimator import ModelResolver, TargetValueMapping
+from fastapi.responses import Response
+from sensor.ml.model.estimator import ModelResolver
 from sensor.utils.main_utils import load_object
-from sensor.utils.main_utils import read_yaml_file
+from fastapi.middleware.cors import CORSMiddleware
 
 
 env_file_path=os.path.join(os.getcwd(),"env.yaml")
@@ -80,7 +77,7 @@ def main():
         logging.exception(e)
 
 
-if __name__ == "__main__":
-    #main()
+if __name__=="__main__":
+    # main()
     # set_env_variable(env_file_path)
-    app_run(app, host = APP_HOST, port = APP_PORT)
+    app_run(app, host=APP_HOST, port=APP_PORT)

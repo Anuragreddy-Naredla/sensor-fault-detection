@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import find_packages,setup
 from typing import List
 
 def get_requirements()->List[str]:
@@ -17,12 +17,12 @@ def get_requirements()->List[str]:
 
 setup(
 
-    name = "sensor",
-    version = "0.0.1",
-    author = "Anurag Reddy Naredla",
-    author_email = "anuragreddy1241@gmail.com",
+    name="sensor",
+    version="0.0.1",
+    author="Anurag Reddy Naredla",
+    author_email="anuragreddy1241@gmail.com",
     # It will search for all packages.
     packages = find_packages(),
-    install_requires = get_requirements()#["pymongo==4.2.0"],
+    install_requires=get_requirements(),#["pymongo==4.2.0"],
 
 )

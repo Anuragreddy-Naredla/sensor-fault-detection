@@ -16,9 +16,10 @@ class MongoDBClient:
                 # mongo_db_url  = "mongodb+srv://<username>:<passowrd>@cluster0.n3qxk.mongodb.net/?retryWrites=true&w=majority"
                 #first set env variable in Terminal by typing "SET MONGODB_URL_KEY" this command
                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
-                if mongo_db_url is None:
-                    raise Exception(f"Environment key: {MONGODB_URL_KEY} is not set.")
-                MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
+                if "localhost" in mongo_db_url:
+                    MongoDBClient.client = pymongo.MongoClient(mongo_db_url)
+                else:
+                    MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
             self.client = MongoDBClient.client
             self.database = self.client[database_name]
             self.database_name = database_name
