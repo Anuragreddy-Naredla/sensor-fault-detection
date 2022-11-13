@@ -18,7 +18,8 @@ class SensorData:
     def __init__(self):
         try:
             # conection to the mongodb client.
-            self.mongo_db_client = MongoDBClient(database_name=DATABASE_NAME)
+            mongo_db_client = MongoDBClient(database_name=DATABASE_NAME)
+            self.mongo_db_client = mongo_db_client.mongo_client()
             print("self.mongo_db_client:", self.mongo_db_client)
             logging.info(f"mongo_db_client:{self.mongo_db_client}")
 
