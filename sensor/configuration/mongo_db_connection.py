@@ -5,6 +5,7 @@ import pymongo
 from sensor.constant.database import DATABASE_NAME
 from sensor.constant.env_variables import MONGODB_URL_KEY
 from sensor.exception import SensorException
+from sensor.logger import logging
 
 ca = certifi.where()
 
@@ -12,6 +13,7 @@ class MongoDBClient:
     client = None
     def __init__(self, database_name=DATABASE_NAME) -> None:
         try:
+            logging.info("started the Mongodb client connection")
             if MongoDBClient.client is None:
                 # mongo_db_url  = "mongodb+srv://<username>:<passowrd>@cluster0.n3qxk.mongodb.net/?retryWrites=true&w=majority"
                 #first set env variable in Terminal by typing "SET MONGODB_URL_KEY" this command
@@ -23,7 +25,6 @@ class MongoDBClient:
             self.client = MongoDBClient.client
             self.database = self.client[database_name]
             self.database_name = database_name
+            logging.info("completed the Mongodb client connection")
         except Exception as e:
             raise SensorException(e, sys)
-
-

@@ -7,6 +7,7 @@ import pandas as pd
 from sensor.configuration.mongo_db_connection import MongoDBClient
 from sensor.constant.database import DATABASE_NAME
 from sensor.exception import SensorException
+from sensor.logger import logging
 
 
 class SensorData:
@@ -37,6 +38,7 @@ class SensorData:
             pd.DataFrame: pd.DataFrame of collection
         """
         try:
+            logging.info("started the exporting collection as dataframe")
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
 
@@ -50,7 +52,7 @@ class SensorData:
                 df = df.drop(columns=["_id"], axis=1)
             # Replacing the na values with np.nan.
             df.replace({"na": np.nan}, inplace=True)
-
+            logging.info("completed the exporting collection as dataframe")
             return df
 
         except Exception as e:
