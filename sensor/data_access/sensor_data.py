@@ -18,7 +18,10 @@ class SensorData:
     def __init__(self):
         try:
             # conection to the mongodb client.
-            self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
+            self.mongo_db_client = MongoDBClient(database_name=DATABASE_NAME)
+            print("self.mongo_db_client:", self.mongo_db_client)
+            logging.info(f"mongo_db_client:{self.mongo_db_client}")
+
 
         except Exception as e:
             raise SensorException(e, sys)
@@ -40,10 +43,13 @@ class SensorData:
         try:
             logging.info("started the exporting collection as dataframe")
             if database_name is None:
-                collection = self.mongo_client.database[collection_name]
+                collection = self.mongo_db_client.database[collection_name]
 
             else:
-                collection = self.mongo_client[database_name][collection_name]
+                print("else")
+                collection = self.mongo_db_client[database_name][collection_name]
+                logging.info(f"mongo_db_client:{collection}")
+                print("collection:", collection)
             # Creating the Dataframe.
             df = pd.DataFrame(list(collection.find()))
 
