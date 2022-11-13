@@ -43,8 +43,6 @@ class SensorData:
         """
         try:
             logging.info("started the exporting collection as dataframe")
-            logging.info(f"mongo_db_client:{self.mongo_db_client[database_name][collection_name]}")
-            logging.info("done_with_saving_mongodb_client")
             if database_name is None:
                 collection = self.mongo_db_client.database[collection_name]
 
@@ -65,4 +63,5 @@ class SensorData:
             return df
 
         except Exception as e:
+            logging.info(f"{e}")
             raise SensorException(e, sys)
