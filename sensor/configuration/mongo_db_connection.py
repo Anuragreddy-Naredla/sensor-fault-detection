@@ -33,7 +33,7 @@ class MongoDBClient:
         try:
             logging.info("started the Mongodb client connection")
             client = None
-            if MongoDBClient.client is None:
+            if client is None:
                 # mongo_db_url  = "mongodb+srv://<username>:<passowrd>@cluster0.n3qxk.mongodb.net/?retryWrites=true&w=majority"
                 #first set env variable in Terminal by typing "SET MONGODB_URL_KEY" this command
                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
