@@ -47,4 +47,5 @@ class MongoDBClient:
             logging.info("completed the Mongodb client connection")
             return client
         except Exception as e:
-            raise logging.info(f"{e}")
+            logging.info(f"{e}")
+            raise SensorException(e, sys)
