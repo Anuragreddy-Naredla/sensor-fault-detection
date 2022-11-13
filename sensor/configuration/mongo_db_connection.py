@@ -38,10 +38,10 @@ class MongoDBClient:
                 #first set env variable in Terminal by typing "SET MONGODB_URL_KEY" this command
                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
                 if "localhost" in mongo_db_url:
-                    MongoDBClient.client = pymongo.MongoClient(mongo_db_url)
+                    client = pymongo.MongoClient(mongo_db_url)
                 else:
-                    MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
-            client = MongoDBClient.client
+                    client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
+            # client = MongoDBClient.client
             # database = MongoDBClient.client[self.database_name]
             # self.database_name = self.database_name
             logging.info("completed the Mongodb client connection")
