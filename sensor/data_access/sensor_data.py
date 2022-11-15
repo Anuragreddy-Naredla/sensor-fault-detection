@@ -46,11 +46,12 @@ class SensorData:
                 logging.info(f"mongo_db_client_if:{collection}")
 
             else:
-                collection = self.mongo_db_client[database_name][collection_name]
+                collection = self.mongo_db_client.database_name[collection_name]
                 logging.info(f"mongo_db_client_else:{collection}")
             # Creating the Dataframe.
+            logging.info("finding_operation")
             df = pd.DataFrame(list(collection.find()))
-
+            logging.info("started the dropping columns")
             # If "_id" is there we are dropping that column.
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)
